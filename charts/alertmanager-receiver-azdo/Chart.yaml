@@ -27,9 +27,9 @@ keywords:
   - prometheus
   - alertmanager
   - azure devops
-home: https://github.com/IvanJosipovic/Alertmanager.Receiver.AzureDevOps
+home: https://github.com/IvanJosipovic/alertmanager-receiver-azdo
 sources:
-  - https://github.com/IvanJosipovic/Alertmanager.Receiver.AzureDevOps
+  - https://github.com/IvanJosipovic/alertmanager-receiver-azdo
 
 annotations:
   artifacthub.io/category: security

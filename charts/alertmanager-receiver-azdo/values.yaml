@@ -15,7 +15,17 @@ nameOverride: ""
 fullnameOverride: ""
 
 settings:
+  # Log Level(Trace, Debug, Information, Warning, Error, Critical, and None)
+  logLevel: Information
 
+  # Azure DevOps Organization
+  organization: Test
+
+  # Azure DevOps Project
+  project: Test
+
+  # Azure DevOps PAT Token
+  pat: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
