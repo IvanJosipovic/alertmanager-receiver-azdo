@@ -1,4 +1,5 @@
-﻿using Microsoft.TeamFoundation.WorkItemTracking.WebApi;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.TeamFoundation.WorkItemTracking.WebApi;
 using Microsoft.VisualStudio.Services.Common;
 using Microsoft.VisualStudio.Services.WebApi;
 using Microsoft.VisualStudio.Services.WebApi.Patch;
@@ -11,11 +12,13 @@ public class AlertProcessor : IAlertProcessor
 {
     private readonly ILogger<AlertProcessor> _logger;
     private readonly Settings _settings;
+    private readonly Instrumentation _meters;
 
-    public AlertProcessor(ILogger<AlertProcessor> logger, Settings settings)
+    public AlertProcessor(ILogger<AlertProcessor> logger, Settings settings, Instrumentation meters)
     {
         _logger = logger;
         _settings = settings;
+        _meters = meters;
     }
 
     public async Task ProcessAlert(AlertmanagerPayload payload)
@@ -49,5 +52,6 @@ public class AlertProcessor : IAlertProcessor
         };
 
         await workItemTrackingClient.CreateWorkItemAsync(document, _settings.Project, "Issue");
+        _meters.AlertCounter.Add(1);
     }
 }
