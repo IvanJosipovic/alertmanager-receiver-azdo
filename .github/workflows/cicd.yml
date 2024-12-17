@@ -30,9 +30,13 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
 
+    - name: Docker Build
+      working-directory: src/Alertmanager.Receiver.AzureDevOps
+      run: docker build -t test.loc/alertmanager-receiver-azdo .
+
     - name: Docker Buildx
       working-directory: src/Alertmanager.Receiver.AzureDevOps
-      run: docker buildx build --platform linux/amd64,linux/arm64 -t test.loc/alertmanager-receiver-azdo --load .
+      run: docker buildx build --platform linux/amd64,linux/arm64 -t test.loc/alertmanager-receiver-azdo .
 
     - run: docker image ls
 
