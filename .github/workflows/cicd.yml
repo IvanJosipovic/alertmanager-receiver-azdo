@@ -32,7 +32,7 @@ jobs:
 
     - name: Docker Buildx
       working-directory: src/Alertmanager.Receiver.AzureDevOps
-      run: docker buildx build --platform linux/amd64 -t test.loc/alertmanager-receiver-azdo .
+      run: docker buildx build --platform linux/amd64,linux/arm64 -t test.loc/alertmanager-receiver-azdo --load .
 
     - run: docker image ls
 
