@@ -1,17 +1,26 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>50ec73e8-656f-4abb-ad08-09a059193aa8</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileContext>.</DockerfileContext>
+    <EnableConfigurationBindingGenerator>true</EnableConfigurationBindingGenerator>
+    <EnableRequestDelegateGenerator>true</EnableRequestDelegateGenerator>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <IsAotCompatible>true</IsAotCompatible>
+    <JsonSerializerIsReflectionEnabledByDefault>false</JsonSerializerIsReflectionEnabledByDefault>
+    <Nullable>enable</Nullable>
+    <OptimizationPreference>Speed</OptimizationPreference>
+    <PublishAot>false</PublishAot>
+    <PublishIISAssets>false</PublishIISAssets>
+    <PublishReadyToRun>true</PublishReadyToRun>
+    <SelfContained>true</SelfContained>
+    <SuppressTrimAnalysisWarnings>false</SuppressTrimAnalysisWarnings>
+    <TrimmerSingleWarn>false</TrimmerSingleWarn>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.TeamFoundationServer.Client" Version="19.225.1" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     <PackageReference Include="OpenTelemetry.Exporter.Prometheus.AspNetCore" Version="1.10.0-beta.1" />
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.10.0" />
     <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.10.1" />
