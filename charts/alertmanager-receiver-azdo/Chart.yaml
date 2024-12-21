@@ -1,6 +1,6 @@
 apiVersion: v2
 name: alertmanager-receiver-azdo
-description: OpenID Connect (OIDC) & OAuth 2 API Server used to secure Kubernetes Ingress
+description: Prometheus Alertmanager Receiver for Azure DevOps
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -32,5 +32,5 @@ sources:
   - https://github.com/IvanJosipovic/alertmanager-receiver-azdo
 
 annotations:
-  artifacthub.io/category: security
+  artifacthub.io/category: monitoring
   artifacthub.io/license: MIT
