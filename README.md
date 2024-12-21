@@ -27,7 +27,9 @@ curl https://raw.githubusercontent.com/IvanJosipovic/alertmanager-receiver-azdo/
 ```
 
 Modify the settings to fit your needs
-https://github.com/IvanJosipovic/alertmanager-receiver-azdo/blob/21bef42c06006a49fad64290b1af321028e41ed7/charts/alertmanager-receiver-azdo/values.yaml#L17C1-L59C22
+
+https://github.com/IvanJosipovic/alertmanager-receiver-azdo/blob/alpha/charts/alertmanager-receiver-azdo/values.yaml#L17C1-L59C22
+
 ###
 
 ### Install Helm Chart
