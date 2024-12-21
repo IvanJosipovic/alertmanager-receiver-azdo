@@ -52,15 +52,11 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-            - mountPath: /tmp
-              name: tmp-volume
             - name: appsettings-volume
               mountPath: /app/appsettings.Production.json
               subPath: appsettings.Production.json
               readOnly: true
       volumes:
-        - name: tmp-volume
-          emptyDir: {}
         - name: appsettings-volume
           secret:
             secretName: {{ include "alertmanager-receiver-azdo.fullname" . }}
