@@ -8,7 +8,12 @@ public class SettingsValidator : AbstractValidator<Settings>
     {
         RuleFor(x => x.Organization).NotEmpty();
         RuleFor(x => x.Project).NotEmpty();
-        RuleFor(x => x.PAT).NotEmpty();
+
+        RuleFor(x => x.PAT).NotEmpty().When(x => string.IsNullOrEmpty(x.TenantId) && string.IsNullOrEmpty(x.ClientId) && string.IsNullOrEmpty(x.ClientSecret));
+
+        RuleFor(x => x.TenantId).NotEmpty().When(x => string.IsNullOrEmpty(x.PAT));
+        RuleFor(x => x.ClientId).NotEmpty().When(x => string.IsNullOrEmpty(x.PAT));
+        //RuleFor(x => x.ClientSecret).NotEmpty().When(x => string.IsNullOrEmpty(x.PAT));
 
         RuleFor(x => x.NewWorkItemFields).NotEmpty();
         RuleForEach(x => x.NewWorkItemFields).SetValidator(new FieldValidator());
