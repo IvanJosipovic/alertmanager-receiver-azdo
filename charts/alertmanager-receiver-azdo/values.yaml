@@ -19,13 +19,44 @@ settings:
   logLevel: Information
 
   # Azure DevOps Organization
-  organization: Test
+  organization: ""
 
   # Azure DevOps Project
-  project: Test
+  project: ""
 
   # Azure DevOps PAT Token
   pat: ""
+
+  # Work Item Type Name
+  workItemType: Issue
+
+  # Fields to set when a Work Item is created
+  # Reference Name: The Azure DevOps Field Reference Name
+  # Format: Specifies the format string for the field value. Use {0}, {1}, etc. to reference values from the JsonPath array.
+  # JsonPath: array of JSONPath values to extract into format
+  # Direct Value: Hard codes a specific value, overrides Format
+  newWorkItemFields:
+  - referenceName: System.Title
+    format: 'Alert: {0}'
+    jsonPaths:
+    - "$.commonAnnotatons['summary']"
+  - referenceName: System.Description
+    format: '<div><b>Summary:</b> {0}<br><b>Description:</b> {1}<br><pre><code>{2}</code></pre></div>'
+    JsonPaths:
+    - "$.commonAnnotations['summary']"
+    - "$.commonAnnotations['description']"
+    - "$"
+  - referenceName: System.Tags
+    directValue: Alert
+
+  # Fields to set when a Work Item is resolved
+  # Reference Name: The Azure DevOps Field Reference Name
+  # Format: Specifies the format string for the field value. Use {0}, {1}, etc. to reference values from the JsonPath array.
+  # JsonPath: array of JSONPath values to extract into format
+  # Direct Value: Hard codes a specific value, overrides Format
+  resolvedWorkItemFields:
+  - ReferenceName: System.State
+    DirectValue: Done
 
 serviceAccount:
   # Specifies whether a service account should be created

@@ -1,7 +1,10 @@
+using FluentValidation;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Services.WebApi.Patch.Json;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
+using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 
 namespace Alertmanager.Receiver.AzureDevOps;
@@ -18,14 +21,17 @@ public class Program
         });
 
         var settings = builder.Configuration.GetSection("Settings").Get<Settings>()!;
+
+        new SettingsValidator().ValidateAndThrow(settings);
+
         builder.Services.AddSingleton(settings);
 
         builder.Services.AddSingleton<IAlertProcessor, AlertProcessor>();
         builder.Services.AddSingleton<Instrumentation>();
 
+        //builder.Logging.SetMinimumLevel(LogLevel.Trace);
         builder.Logging.AddFilter("Default", settings.LogLevel);
         builder.Logging.AddFilter("Microsoft.AspNetCore", LogLevel.Warning);
-        builder.Logging.AddFilter("Microsoft.AspNetCore.HttpLogging.HttpLoggingMiddleware", settings.LogLevel);
         builder.Logging.AddFilter("Microsoft.Extensions.Diagnostics.HealthChecks", LogLevel.Warning);
         builder.Logging.AddFilter("Microsoft.Hosting.Lifetime", LogLevel.Warning);
         builder.Logging.AddFilter("Microsoft.AspNetCore.DataProtection", LogLevel.Error);
@@ -63,7 +69,7 @@ public class Program
         builder.Services.Configure<ForwardedHeadersOptions>(options => options.ForwardedHeaders = ForwardedHeaders.All);
 
         var app = builder.Build();
-
+        app.Logger.LogInformation("Starting Application");
         app.UseForwardedHeaders();
         app.MapPrometheusScrapingEndpoint();
         app.MapHealthChecks("/health");
@@ -77,8 +83,10 @@ public class Program
     }
 }
 
-
 [JsonSerializable(typeof(AlertmanagerPayload))]
+[JsonSerializable(typeof(JsonArray))]
+[JsonSerializable(typeof(JsonNode))]
+[JsonSerializable(typeof(JsonPatchDocument))]
 public partial class JSContext : JsonSerializerContext
 {
 }

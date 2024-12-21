@@ -6,48 +6,48 @@ namespace Alertmanager.Receiver.AzureDevOps;
 public class AlertmanagerPayload
 {
     [JsonPropertyName("version")]
-    public string Version { get; set; }
+    public string Version { get; set; } = null!;
 
     [JsonPropertyName("groupKey")]
-    public string GroupKey { get; set; }
+    public string GroupKey { get; set; } = null!;
 
     [JsonPropertyName("truncatedAlerts")]
     public int TruncatedAlerts { get; set; }
 
     // resolved or firing
     [JsonPropertyName("status")]
-    public string Status { get; set; }
+    public string Status { get; set; } = null!;
 
     [JsonPropertyName("receiver")]
-    public string Receiver { get; set; }
+    public string Receiver { get; set; } = null!;
 
     [JsonPropertyName("groupLabels")]
-    public Dictionary<string, string> GroupLabels { get; set; }
+    public Dictionary<string, string> GroupLabels { get; set; } = null!;
 
     [JsonPropertyName("commonLabels")]
-    public Dictionary<string, string> CommonLabels { get; set; }
+    public Dictionary<string, string> CommonLabels { get; set; } = null!;
 
     [JsonPropertyName("commonAnnotations")]
-    public Dictionary<string, string> CommonAnnotations { get; set; }
+    public Dictionary<string, string> CommonAnnotations { get; set; } = null!;
 
     [JsonPropertyName("externalURL")]
-    public string ExternalURL { get; set; }
+    public string ExternalURL { get; set; } = null!;
 
     [JsonPropertyName("alerts")]
-    public List<Alert> Alerts { get; set; }
+    public List<Alert> Alerts { get; set; } = null!;
 }
 
 public class Alert
 {
     // resolved or firing
     [JsonPropertyName("status")]
-    public string Status { get; set; }
+    public string Status { get; set; } = null!;
 
     [JsonPropertyName("labels")]
-    public Dictionary<string, string> Labels { get; set; }
+    public Dictionary<string, string> Labels { get; set; } = null!;
 
     [JsonPropertyName("annotations")]
-    public Dictionary<string, string> Annotations { get; set; }
+    public Dictionary<string, string> Annotations { get; set; } = null!;
 
     [JsonPropertyName("startsAt")]
     public DateTime StartsAt { get; set; }
@@ -56,8 +56,8 @@ public class Alert
     public DateTime EndsAt { get; set; }
 
     [JsonPropertyName("generatorURL")]
-    public string GeneratorURL { get; set; }
+    public string GeneratorURL { get; set; } = null!;
 
     [JsonPropertyName("fingerprint")]
-    public string Fingerprint { get; set; }
+    public string Fingerprint { get; set; } = null!;
 }
