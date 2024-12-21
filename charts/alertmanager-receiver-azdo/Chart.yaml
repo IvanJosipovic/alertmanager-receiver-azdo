@@ -34,5 +34,5 @@ sources:
   - https://github.com/IvanJosipovic/alertmanager-receiver-azdo
 
 annotations:
-  artifacthub.io/category: Monitoring and logging
+  artifacthub.io/category: monitoring-logging
   artifacthub.io/license: MIT
