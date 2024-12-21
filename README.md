@@ -9,7 +9,7 @@ This project is an API server which implements the [Alertmanager Webhook Receive
 
 ## Features
 - Create and resolve Azure DevOps work items
-- Customizble Fields allow support for custom Azure DevOps Processes
+- Customizable Fields allow support for custom Azure DevOps Processes
 - Authentication
   - Personal Access Token
   - Service Principle
