@@ -47,6 +47,8 @@ jobs:
         ignore-unfixed: true
         vuln-type: 'os,library'
         severity: 'CRITICAL,HIGH'
+      env:
+        TRIVY_DISABLE_VEX_NOTICE: true
 
   create-release:
     if: ${{ github.event_name != 'pull_request' }}
