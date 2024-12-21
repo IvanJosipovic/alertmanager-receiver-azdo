@@ -28,8 +28,6 @@ curl https://raw.githubusercontent.com/IvanJosipovic/alertmanager-receiver-azdo/
 
 Modify the settings to fit your needs
 
-https://github.com/IvanJosipovic/alertmanager-receiver-azdo/blob/alpha/charts/alertmanager-receiver-azdo/values.yaml#L17C1-L59C22
-
 ###
 
 ### Install Helm Chart
@@ -40,4 +38,27 @@ helm repo add alertmanager-receiver-azdo https://ivanjosipovic.github.io/alertma
 helm repo update
 
 helm install alertmanager-receiver-azdo alertmanager-receiver-azdo/alertmanager-receiver-azdo --create-namespace --namespace alertmanager-receiver-azdo -f values.yaml
+```
+
+### Create Alertmanager Config
+
+```yaml
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: azdo
+  namespace: monitoring
+  labels:
+    alertmanagerConfig: azdo
+spec:
+  route:
+    groupBy: ['namespace']
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 12h
+    receiver: 'webhook'
+  receivers:
+  - name: 'webhook'
+    webhookConfigs:
+    - url: 'http://alertmanager-receiver-azdo.alertmanager-receiver-azdo.svc.cluster.local:8080/alert'
 ```
