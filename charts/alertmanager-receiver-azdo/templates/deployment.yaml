@@ -33,6 +33,18 @@ spec:
           env:
           - name: ASPNETCORE_ENVIRONMENT
             value: Production
+          {{- if .Values.settings.tenantId }}
+          - name: AZURE_TENANT_ID
+            value: {{ .Values.settings.tenantId }}
+          {{- end }}
+          {{- if .Values.settings.clientId }}
+          - name: AZURE_CLIENT_ID
+            value: {{ .Values.settings.clientId }}
+          {{- end }}
+          {{- if .Values.settings.clientSecret }}
+          - name: AZURE_CLIENT_SECRET
+            value: {{ .Values.settings.clientSecret }}
+          {{- end }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
