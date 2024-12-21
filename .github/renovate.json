@@ -1,0 +1,54 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "enabled": true,
+  "timezone": "America/Vancouver",
+  "dependencyDashboard": true,
+  "semanticCommits": "enabled",
+  "assignees": ["@ivanjosipovic"],
+  "extends": [ "config:recommended" ],
+  "platformAutomerge": true,
+  "ignorePaths": [
+    "**/docs/**",
+    "**/charts/**"
+  ],
+  "schedule": ["before 4am"],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "automerge": true,
+      "semanticCommitType": "fix",
+      "matchFileNames": [
+        "src/**",
+        "global.json"
+      ]
+    },
+    {
+      "matchUpdateTypes": [ "minor", "patch", "digest" ],
+      "automerge": true,
+      "matchFileNames": [
+        "tests/**",
+        "benchmarks/**"
+      ]
+    },
+    {
+      "matchUpdateTypes": ["major", "minor", "patch", "digest"],
+      "automerge": true,
+      "semanticCommitType": "fix",
+      "packageRules": [
+        {
+          "matchPackageNames": ["alpine_*/ca-certificates-bundle"]
+        }
+      ]
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["Dockerfile$"],
+      "matchStrings": [
+        "#\\s*renovate:\\s*datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\sENV .*?_VERSION=\"(?<currentValue>.*)\"\\s"
+      ],
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    }
+  ]
+}
