@@ -24,8 +24,17 @@ settings:
   # Azure DevOps Project
   project: ""
 
-  # Azure DevOps PAT Token
+  # Azure DevOps PAT Token. This is needed when not using Service Principle, Managed Identity or Workload Identity authentication
   pat: ""
+
+  # Entra Tenant Id. This is needed for Service Principle, Managed Identity and Workload Identity authentication
+  tenantId: ""
+
+  # Entra Application Client ID. This is needed for Service Principle, Managed Identity and Workload Identity authentication
+  clientId: ""
+
+  # Entra Application Client Secret. This is needed for Service Principle authentication
+  clientSecret: ""
 
   # Work Item Type Name
   workItemType: Issue
