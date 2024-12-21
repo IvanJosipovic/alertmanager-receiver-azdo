@@ -15,7 +15,7 @@ RUN dotnet publish "Alertmanager.Receiver.AzureDevOps.csproj" -c Release --use-c
 FROM mcr.microsoft.com/dotnet/runtime-deps:9.0-alpine@sha256:1478697b27d89ce203e905d72861a1f3f70c22d1abbb50f96a594d0ebbb8dbf6 AS base
 WORKDIR /app
 EXPOSE 8080
-ENV ASPNETCORE_URLS=http://+:8080
+
 LABEL org.opencontainers.image.description="Prometheus Alertmanager Receiver for Azure DevOps"
 
 # renovate: datasource=repology depName=alpine_3_20/ca-certificates-bundle versioning=loose

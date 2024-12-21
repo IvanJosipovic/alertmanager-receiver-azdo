@@ -36,7 +36,7 @@ public class AlertProcessor : IAlertProcessor
         if (payload.Status == "firing")
         {
             // Create new WorkItem
-            var document = GenerateWorkItem(payload, jsonNode, _settings.NewWorkItemFields);
+            var document = GenerateWorkItem(payload, jsonNode, _settings.NewWorkItemFields, true);
 
             _logger.LogDebug("Prepared Payload: {payload}", JsonSerializer.Serialize(document, typeof(JsonPatchDocument), JSContext.Default));
 
@@ -55,7 +55,9 @@ public class AlertProcessor : IAlertProcessor
             {
                 var workItemRef = searchResults.WorkItems.First();
 
-                var document = GenerateWorkItem(payload, jsonNode, _settings.ResolvedWorkItemFields);
+                var document = GenerateWorkItem(payload, jsonNode, _settings.ResolvedWorkItemFields, false);
+
+                _logger.LogDebug("Prepared Payload: {payload}", JsonSerializer.Serialize(document, typeof(JsonPatchDocument), JSContext.Default));
 
                 var workItem = await workItemTrackingClient.UpdateWorkItemAsync(document, workItemRef.Id);
                 _meters.ResolvedAlertCounter.Add(1);
@@ -64,7 +66,7 @@ public class AlertProcessor : IAlertProcessor
         }
     }
 
-    public JsonPatchDocument GenerateWorkItem(AlertmanagerPayload payload, JsonNode jsonNode, List<Field> fields, bool addFingerprint = false)
+    public JsonPatchDocument GenerateWorkItem(AlertmanagerPayload payload, JsonNode jsonNode, List<Field> fields, bool addFingerprint)
     {
         var document = new JsonPatchDocument();
 
