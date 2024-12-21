@@ -50,7 +50,8 @@ public class AlertProcessor : IAlertProcessor
             }
         };
 
-        await workItemTrackingClient.CreateWorkItemAsync(document, _settings.Project, "Issue");
+        var workItem = await workItemTrackingClient.CreateWorkItemAsync(document, _settings.Project, "Issue");
         _meters.AlertCounter.Add(1);
+        _logger.LogInformation("Created WorkItem: {id} - {title}", workItem.Id, workItem.Fields["System.Title"]);
     }
 }
