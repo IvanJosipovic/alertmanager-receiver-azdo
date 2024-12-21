@@ -29,8 +29,8 @@ public class Program
         builder.Services.AddSingleton<IAlertProcessor, AlertProcessor>();
         builder.Services.AddSingleton<Instrumentation>();
 
-        //builder.Logging.SetMinimumLevel(LogLevel.Trace);
         builder.Logging.AddFilter("Default", settings.LogLevel);
+        builder.Logging.AddFilter("Alertmanager", settings.LogLevel);
         builder.Logging.AddFilter("Microsoft.AspNetCore", LogLevel.Warning);
         builder.Logging.AddFilter("Microsoft.Extensions.Diagnostics.HealthChecks", LogLevel.Warning);
         builder.Logging.AddFilter("Microsoft.Hosting.Lifetime", LogLevel.Warning);
