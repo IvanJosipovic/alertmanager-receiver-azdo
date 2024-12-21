@@ -27,10 +27,12 @@ keywords:
   - prometheus
   - alertmanager
   - azure devops
+  - alert
+  - notification
 home: https://github.com/IvanJosipovic/alertmanager-receiver-azdo
 sources:
   - https://github.com/IvanJosipovic/alertmanager-receiver-azdo
 
 annotations:
-  artifacthub.io/category: monitoring
+  artifacthub.io/category: Monitoring and logging
   artifacthub.io/license: MIT

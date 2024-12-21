@@ -28,8 +28,6 @@ curl https://raw.githubusercontent.com/IvanJosipovic/alertmanager-receiver-azdo/
 
 Modify the settings to fit your needs
 
-###
-
 ### Install Helm Chart
 
 ```bash
