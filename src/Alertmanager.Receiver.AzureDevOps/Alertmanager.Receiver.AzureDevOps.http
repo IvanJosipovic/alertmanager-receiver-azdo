@@ -1,4 +1,4 @@
-@Alertmanager.Receiver.AzureDevOps_HostAddress = http://localhost:5002
+@Alertmanager.Receiver.AzureDevOps_HostAddress = http://localhost:8080
 
 POST {{Alertmanager.Receiver.AzureDevOps_HostAddress}}/alert
 Accept: application/json

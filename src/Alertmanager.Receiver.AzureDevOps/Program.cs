@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
+using System.Text.Json.Serialization;
 
 namespace Alertmanager.Receiver.AzureDevOps;
 
@@ -10,6 +11,11 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+
+        builder.Services.ConfigureHttpJsonOptions(options =>
+        {
+            options.SerializerOptions.TypeInfoResolverChain.Add(JSContext.Default);
+        });
 
         var settings = builder.Configuration.GetSection("Settings").Get<Settings>()!;
         builder.Services.AddSingleton(settings);
@@ -69,4 +75,10 @@ public class Program
 
         app.Run();
     }
+}
+
+
+[JsonSerializable(typeof(AlertmanagerPayload))]
+public partial class JSContext : JsonSerializerContext
+{
 }

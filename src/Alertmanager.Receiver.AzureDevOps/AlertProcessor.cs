@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.TeamFoundation.WorkItemTracking.WebApi;
+﻿using Microsoft.TeamFoundation.WorkItemTracking.WebApi;
 using Microsoft.VisualStudio.Services.Common;
 using Microsoft.VisualStudio.Services.WebApi;
 using Microsoft.VisualStudio.Services.WebApi.Patch;
@@ -23,7 +22,7 @@ public class AlertProcessor : IAlertProcessor
 
     public async Task ProcessAlert(AlertmanagerPayload payload)
     {
-        _logger.LogInformation("Processing Alert: {payload}", JsonSerializer.Serialize(payload));
+        _logger.LogInformation("Processing Alert: {payload}", JsonSerializer.Serialize(payload, typeof(AlertmanagerPayload), JSContext.Default));
 
         var connection = new VssConnection(new Uri($"https://dev.azure.com/{_settings.Organization}"), new VssBasicCredential(string.Empty, _settings.PAT));
 

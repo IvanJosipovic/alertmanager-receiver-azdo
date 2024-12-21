@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <UserSecretsId>50ec73e8-656f-4abb-ad08-09a059193aa8</UserSecretsId>
     <EnableConfigurationBindingGenerator>true</EnableConfigurationBindingGenerator>
     <EnableRequestDelegateGenerator>true</EnableRequestDelegateGenerator>
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>true</InvariantGlobalization>
     <IsAotCompatible>true</IsAotCompatible>
     <JsonSerializerIsReflectionEnabledByDefault>false</JsonSerializerIsReflectionEnabledByDefault>
+    <LangVersion>preview</LangVersion>
     <Nullable>enable</Nullable>
     <OptimizationPreference>Speed</OptimizationPreference>
     <PublishAot>false</PublishAot>
@@ -17,6 +17,7 @@
     <SelfContained>true</SelfContained>
     <SuppressTrimAnalysisWarnings>false</SuppressTrimAnalysisWarnings>
     <TrimmerSingleWarn>false</TrimmerSingleWarn>
+    <UserSecretsId>50ec73e8-656f-4abb-ad08-09a059193aa8</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
