@@ -8,13 +8,18 @@ public class Settings
 
     public string Project { get; set; } = null!;
 
-    public string PAT { get; set; } = null!;
-
     public string WorkItemType { get; set; } = null!;
 
     public List<Field> ResolvedWorkItemFields { get; set; } = null!;
 
     public List<Field> NewWorkItemFields { get; set; } = null!;
+
+    // Auth
+    public string PAT { get; set; } = null!;
+
+    public string TenantId { get; set; } = null!;
+    public string ClientId { get; set; } = null!;
+    public string ClientSecret { get; set; } = null!;
 }
 
 public class Field

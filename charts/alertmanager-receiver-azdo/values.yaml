@@ -39,12 +39,12 @@ settings:
   - referenceName: System.Title
     format: 'Alert: {0}'
     jsonPaths:
-    - "$.commonAnnotatons['summary']"
+    - "$.alerts[0].annotations['summary']"
   - referenceName: System.Description
     format: '<div><b>Summary:</b> {0}<br><b>Description:</b> {1}<br><pre><code>{2}</code></pre></div>'
-    JsonPaths:
-    - "$.commonAnnotations['summary']"
-    - "$.commonAnnotations['description']"
+    jsonPaths:
+    - "$.alerts[0].annotations['summary']"
+    - "$.alerts[0].annotations['description']"
     - "$"
   - referenceName: System.Tags
     directValue: Alert

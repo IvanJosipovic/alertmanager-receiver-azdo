@@ -1,6 +1,10 @@
-﻿using Json.Path;
+﻿using Azure.Core;
+using Azure.Identity;
+using Json.Path;
+using Microsoft.Identity.Client;
 using Microsoft.TeamFoundation.WorkItemTracking.WebApi;
 using Microsoft.TeamFoundation.WorkItemTracking.WebApi.Models;
+using Microsoft.VisualStudio.Services.Client;
 using Microsoft.VisualStudio.Services.Common;
 using Microsoft.VisualStudio.Services.WebApi;
 using Microsoft.VisualStudio.Services.WebApi.Patch;
@@ -15,6 +19,7 @@ public class AlertProcessor : IAlertProcessor
     private readonly ILogger<AlertProcessor> _logger;
     private readonly Settings _settings;
     private readonly Instrumentation _meters;
+    private DefaultAzureCredential azureCredential;
 
     public AlertProcessor(ILogger<AlertProcessor> logger, Settings settings, Instrumentation meters)
     {
@@ -26,12 +31,13 @@ public class AlertProcessor : IAlertProcessor
     public async Task ProcessAlert(AlertmanagerPayload payload)
     {
         var json = JsonSerializer.Serialize(payload, typeof(AlertmanagerPayload), JSContext.Default);
+        var jsonNode = (JsonNode)JsonSerializer.Deserialize(json, typeof(JsonNode), JSContext.Default)!;
+
         _logger.LogDebug("Processing Alert: {payload}", json);
 
-        var connection = new VssConnection(new Uri($"https://dev.azure.com/{_settings.Organization}"), new VssBasicCredential(string.Empty, _settings.PAT));
+        var connection = await VssConnection();
 
         var workItemTrackingClient = connection.GetClient<WorkItemTrackingHttpClient>();
-        var jsonNode = (JsonNode)JsonSerializer.Deserialize(json, typeof(JsonNode), JSContext.Default)!;
 
         if (payload.Status == "firing")
         {
@@ -66,7 +72,45 @@ public class AlertProcessor : IAlertProcessor
         }
     }
 
-    public JsonPatchDocument GenerateWorkItem(AlertmanagerPayload payload, JsonNode jsonNode, List<Field> fields, bool addFingerprint)
+    private async Task<VssConnection> VssConnection()
+    {
+        VssCredentials creds;
+
+        if (!string.IsNullOrEmpty(_settings.PAT))
+        {
+            creds = new VssBasicCredential(string.Empty, _settings.PAT);
+        }
+        else
+        {
+            azureCredential ??= new DefaultAzureCredential(new DefaultAzureCredentialOptions()
+            {
+                ExcludeAzureCliCredential = true,
+                ExcludeAzureDeveloperCliCredential = true,
+                ExcludeAzurePowerShellCredential = true,
+                ExcludeInteractiveBrowserCredential = true,
+                ExcludeSharedTokenCacheCredential = true,
+                ExcludeVisualStudioCodeCredential = true,
+                ExcludeVisualStudioCredential = true,
+            });
+
+            try
+            {
+                var accessToken = await azureCredential.GetTokenAsync(new TokenRequestContext(["499b84ac-1321-427f-aa17-267ca6975798/.default"]));
+                creds = new VssAadCredential(new VssAadToken(accessToken.TokenType, accessToken.Token));
+            }
+            catch (MsalServiceException ex)
+            {
+                _logger.LogError(ex, "Error Acquiring Token");
+                throw;
+            }
+        }
+
+        var connection = new VssConnection(new Uri($"https://dev.azure.com/{_settings.Organization}"), creds);
+
+        return connection;
+    }
+
+    private JsonPatchDocument GenerateWorkItem(AlertmanagerPayload payload, JsonNode jsonNode, List<Field> fields, bool addFingerprint)
     {
         var document = new JsonPatchDocument();
 
@@ -94,7 +138,7 @@ public class AlertProcessor : IAlertProcessor
 
                     if (results is null || results.Matches is null || results.Matches.Count == 0 || results.Matches[0].Value is null)
                     {
-                        var message = $"Field: {field.ReferenceName} JSONPath:{path} Warning: JSONPath did not find a match.";
+                        var message = $"Field: {field.ReferenceName} JSONPath: {path} Warning: JSONPath did not find a match.";
                         parameters.Add(message);
                         _logger.LogWarning(message);
 

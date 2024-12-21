@@ -4,91 +4,95 @@ POST {{Alertmanager.Receiver.AzureDevOps_HostAddress}}/alert
 Accept: application/json
 Content-Type: application/json
 {
-  "receiver": "azdo",
-  "status": "firing",
-  "alerts": [
-    {
-      "status": "firing",
-      "labels": {
-        "alertname": "ProbeFailure",
-        "instance": "https://server.example.org",
-        "job": "http_checks",
-        "monitor": "master",
-        "severity": "critical"
-      },
-      "annotations": {
-        "description": "Instance https://server.example.org has been down for over 5m. Job: http_checks",
-        "summary": "BlackBox Probe Failure: https://server.example.org"
-      },
-      "startsAt": "2023-02-06T13:08:45.828Z",
-      "endsAt": "0001-01-01T00:00:00Z",
-      "generatorURL": "http://prometheus.example.org:9090/graph?g0.expr=probe_success+%3D%3D+0\\u0026g0.tab=1",
-      "fingerprint": "1a30ba71cca2921f"
-    }
-  ],
-  "groupLabels": {
-    "alertname": "ProbeFailure"
-  },
-  "commonLabels": {
-    "alertname": "ProbeFailure",
-    "instance": "https://server.example.org",
-    "job": "http_checks",
-    "monitor": "master",
-    "severity": "critical"
-  },
-  "commonAnnotations": {
-    "description": "Instance https://server.example.org has been down for over 5m. Job: http_checks",
-    "summary": "BlackBox Probe Failure: https://server.example.org"
-  },
-  "externalURL": "http://prometheus.example.org:9093",
-  "version": "4",
-  "groupKey": "{}/{severity=\"critical\"}:{alertname=\"ProbeFailure\"}",
-  "truncatedAlerts": 0
+    "alerts": [
+        {
+            "annotations": {
+                "description": "100% of reconciling operations failed for alertmanager controller in monitoring namespace.",
+                "runbook_url": "https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorreconcileerrors",
+                "summary": "Errors while reconciling objects."
+            },
+            "endsAt": "0001-01-01T00:00:00Z",
+            "fingerprint": "7005ab8c2b56ed95",
+            "generatorURL": "http://prometheus-kube-prometheus-prometheus.monitoring:9090/graph?g0.expr=%28sum+by+%28cluster%2C+controller%2C+namespace%29+%28rate%28prometheus_operator_reconcile_errors_total%7Bjob%3D%22prometheus-kube-prometheus-operator%22%2Cnamespace%3D%22monitoring%22%7D%5B5m%5D%29%29%29+%2F+%28sum+by+%28cluster%2C+controller%2C+namespace%29+%28rate%28prometheus_operator_reconcile_operations_total%7Bjob%3D%22prometheus-kube-prometheus-operator%22%2Cnamespace%3D%22monitoring%22%7D%5B5m%5D%29%29%29+%3E+0.1&g0.tab=1",
+            "labels": {
+                "alertname": "PrometheusOperatorReconcileErrors",
+                "controller": "alertmanager",
+                "namespace": "monitoring",
+                "prometheus": "monitoring/prometheus-kube-prometheus-prometheus",
+                "severity": "warning"
+            },
+            "startsAt": "2024-12-21T11:36:50.474Z",
+            "status": "firing"
+        }
+    ],
+    "commonAnnotations": {
+        "description": "100% of reconciling operations failed for alertmanager controller in monitoring namespace.",
+        "runbook_url": "https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorreconcileerrors",
+        "summary": "Errors while reconciling objects."
+    },
+    "commonLabels": {
+        "alertname": "PrometheusOperatorReconcileErrors",
+        "controller": "alertmanager",
+        "namespace": "monitoring",
+        "prometheus": "monitoring/prometheus-kube-prometheus-prometheus",
+        "severity": "warning"
+    },
+    "externalURL": "http://prometheus-kube-prometheus-alertmanager.monitoring:9093",
+    "groupKey": "{}/{namespace=\"monitoring\"}:{namespace=\"monitoring\"}",
+    "groupLabels": {
+        "namespace": "monitoring"
+    },
+    "receiver": "monitoring/azdo/webhook",
+    "status": "firing",
+    "truncatedAlerts": 0,
+    "version": "4"
 }
 ###
 POST {{Alertmanager.Receiver.AzureDevOps_HostAddress}}/alert
 Accept: application/json
 Content-Type: application/json
 {
-  "receiver": "azdo",
-  "status": "resolved",
-  "alerts": [
-    {
-      "status": "resolved",
-      "labels": {
-        "alertname": "ProbeFailure",
-        "instance": "https://server.example.org",
-        "job": "http_checks",
-        "monitor": "master",
-        "severity": "critical"
-      },
-      "annotations": {
-        "description": "Instance https://server.example.org has been down for over 5m. Job: http_checks",
-        "summary": "BlackBox Probe Failure: https://server.example.org"
-      },
-      "startsAt": "2023-02-06T13:08:45.828Z",
-      "endsAt": "0001-01-01T00:00:00Z",
-      "generatorURL": "http://prometheus.example.org:9090/graph?g0.expr=probe_success+%3D%3D+0\\u0026g0.tab=1",
-      "fingerprint": "1a30ba71cca2921f"
-    }
-  ],
-  "groupLabels": {
-    "alertname": "ProbeFailure"
-  },
-  "commonLabels": {
-    "alertname": "ProbeFailure",
-    "instance": "https://server.example.org",
-    "job": "http_checks",
-    "monitor": "master",
-    "severity": "critical"
-  },
-  "commonAnnotations": {
-    "description": "Instance https://server.example.org has been down for over 5m. Job: http_checks",
-    "summary": "BlackBox Probe Failure: https://server.example.org"
-  },
-  "externalURL": "http://prometheus.example.org:9093",
-  "version": "4",
-  "groupKey": "{}/{severity=\"critical\"}:{alertname=\"ProbeFailure\"}",
-  "truncatedAlerts": 0
+    "alerts": [
+        {
+            "annotations": {
+                "description": "100% of reconciling operations failed for alertmanager controller in monitoring namespace.",
+                "runbook_url": "https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorreconcileerrors",
+                "summary": "Errors while reconciling objects."
+            },
+            "endsAt": "0001-01-01T00:00:00Z",
+            "fingerprint": "7005ab8c2b56ed95",
+            "generatorURL": "http://prometheus-kube-prometheus-prometheus.monitoring:9090/graph?g0.expr=%28sum+by+%28cluster%2C+controller%2C+namespace%29+%28rate%28prometheus_operator_reconcile_errors_total%7Bjob%3D%22prometheus-kube-prometheus-operator%22%2Cnamespace%3D%22monitoring%22%7D%5B5m%5D%29%29%29+%2F+%28sum+by+%28cluster%2C+controller%2C+namespace%29+%28rate%28prometheus_operator_reconcile_operations_total%7Bjob%3D%22prometheus-kube-prometheus-operator%22%2Cnamespace%3D%22monitoring%22%7D%5B5m%5D%29%29%29+%3E+0.1&g0.tab=1",
+            "labels": {
+                "alertname": "PrometheusOperatorReconcileErrors",
+                "controller": "alertmanager",
+                "namespace": "monitoring",
+                "prometheus": "monitoring/prometheus-kube-prometheus-prometheus",
+                "severity": "warning"
+            },
+            "startsAt": "2024-12-21T11:36:50.474Z",
+            "status": "resolved"
+        }
+    ],
+    "commonAnnotations": {
+        "description": "100% of reconciling operations failed for alertmanager controller in monitoring namespace.",
+        "runbook_url": "https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorreconcileerrors",
+        "summary": "Errors while reconciling objects."
+    },
+    "commonLabels": {
+        "alertname": "PrometheusOperatorReconcileErrors",
+        "controller": "alertmanager",
+        "namespace": "monitoring",
+        "prometheus": "monitoring/prometheus-kube-prometheus-prometheus",
+        "severity": "warning"
+    },
+    "externalURL": "http://prometheus-kube-prometheus-alertmanager.monitoring:9093",
+    "groupKey": "{}/{namespace=\"monitoring\"}:{namespace=\"monitoring\"}",
+    "groupLabels": {
+        "namespace": "monitoring"
+    },
+    "receiver": "monitoring/azdo/webhook",
+    "status": "resolved",
+    "truncatedAlerts": 0,
+    "version": "4"
 }
 ###
