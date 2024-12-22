@@ -2,6 +2,7 @@
 
 [![GitHub](https://img.shields.io/github/stars/ivanjosipovic/alertmanager-receiver-azdo?style=social)](https://github.com/IvanJosipovic/alertmanager-receiver-azdo)
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/alertmanager-receiver-azdo)](https://artifacthub.io/packages/helm/alertmanager-receiver-azdo/alertmanager-receiver-azdo)
+![Downloads](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fipitio%2Fbackage%2Frefs%2Fheads%2Findex%2FIvanJosipovic%2Falertmanager-receiver-azdo%2Falertmanager-receiver-azdo%25252Falertmanager-receiver-azdo.json&query=%24.downloads&label=downloads)
 
 ## What is this?
 
