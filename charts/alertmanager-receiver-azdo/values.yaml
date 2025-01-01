@@ -64,8 +64,8 @@ settings:
   # JsonPath: array of JSONPath values to extract into format
   # Direct Value: Hard codes a specific value, overrides Format
   resolvedWorkItemFields:
-  - ReferenceName: System.State
-    DirectValue: Done
+  - referenceName: System.State
+    directValue: Done
 
 serviceAccount:
   # Specifies whether a service account should be created
