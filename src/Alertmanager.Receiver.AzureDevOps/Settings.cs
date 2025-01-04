@@ -29,8 +29,8 @@ public class Authentication
 
 public enum LogFormat
 {
+    Simple,
     JSON,
-    Simple
 }
 
 public class Field
