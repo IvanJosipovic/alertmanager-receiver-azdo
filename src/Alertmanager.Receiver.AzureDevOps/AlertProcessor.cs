@@ -19,7 +19,7 @@ public class AlertProcessor : IAlertProcessor
     private readonly ILogger<AlertProcessor> _logger;
     private readonly Settings _settings;
     private readonly Instrumentation _meters;
-    private DefaultAzureCredential azureCredential;
+    private DefaultAzureCredential? azureCredential;
 
     public AlertProcessor(ILogger<AlertProcessor> logger, Settings settings, Instrumentation meters)
     {
