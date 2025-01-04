@@ -27,17 +27,23 @@ settings:
   # Azure DevOps Project
   project: ""
 
-  # Azure DevOps PAT Token. This is needed when not using Service Principle, Managed Identity or Workload Identity authentication
-  pat: ""
+  authentication:
+    # Azure DevOps PAT Token. This is needed when not using Service Principle or Workload Identity authentication
+    pat: ""
 
-  # Entra Tenant Id. This is needed for Service Principle, Managed Identity and Workload Identity authentication
-  tenantId: ""
+    # Entra Tenant Id. This is needed for Service Principle and Workload Identity authentication
+    tenantId: ""
 
-  # Entra Application Client ID. This is needed for Service Principle, Managed Identity and Workload Identity authentication
-  clientId: ""
+    # Entra Application Client ID. This is needed for Service Principle and Workload Identity authentication
+    clientId: ""
 
-  # Entra Application Client Secret. This is needed for Service Principle authentication
-  clientSecret: ""
+    # Entra Application Client Secret. This is needed for Service Principle authentication
+    clientSecret: ""
+
+    # Alternatively, enter the Kubernetes Secret name
+    # Note, this will override the settings above
+    # Must contain keys called pat or tenantId or clientId or clientSecret
+    kubeSecretName: ""
 
   # Work Item Type Name
   workItemType: Issue
@@ -45,7 +51,7 @@ settings:
   # Fields to set when a Work Item is created
   # Reference Name: The Azure DevOps Field Reference Name
   # Format: Specifies the format string for the field value. Use {0}, {1}, etc. to reference values from the JsonPath array.
-  # JsonPath: array of JSONPath values to extract into format
+  # JsonPaths: array of JSONPath values to extract into format
   # Direct Value: Hard codes a specific value, overrides Format
   newWorkItemFields:
   - referenceName: System.Title
@@ -64,7 +70,7 @@ settings:
   # Fields to set when a Work Item is resolved
   # Reference Name: The Azure DevOps Field Reference Name
   # Format: Specifies the format string for the field value. Use {0}, {1}, etc. to reference values from the JsonPath array.
-  # JsonPath: array of JSONPath values to extract into format
+  # JsonPaths: array of JSONPath values to extract into format
   # Direct Value: Hard codes a specific value, overrides Format
   resolvedWorkItemFields:
   - referenceName: System.State

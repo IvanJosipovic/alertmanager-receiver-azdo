@@ -14,7 +14,6 @@ This project is an API server which implements the [Alertmanager Webhook Receive
 - Authentication
   - Personal Access Token
   - Service Principle
-  - Managed Identity
   - Workload Identity
 - AMD64 and ARM64 support
 

@@ -19,7 +19,7 @@ public class AlertProcessor : IAlertProcessor
     private readonly ILogger<AlertProcessor> _logger;
     private readonly Settings _settings;
     private readonly Instrumentation _meters;
-    private DefaultAzureCredential azureCredential;
+    private DefaultAzureCredential? azureCredential;
 
     public AlertProcessor(ILogger<AlertProcessor> logger, Settings settings, Instrumentation meters)
     {
@@ -76,22 +76,13 @@ public class AlertProcessor : IAlertProcessor
     {
         VssCredentials creds;
 
-        if (!string.IsNullOrEmpty(_settings.PAT))
+        if (!string.IsNullOrEmpty(_settings.Authentication.PAT))
         {
-            creds = new VssBasicCredential(string.Empty, _settings.PAT);
+            creds = new VssBasicCredential(string.Empty, _settings.Authentication.PAT);
         }
         else
         {
-            azureCredential ??= new DefaultAzureCredential(new DefaultAzureCredentialOptions()
-            {
-                ExcludeAzureCliCredential = true,
-                ExcludeAzureDeveloperCliCredential = true,
-                ExcludeAzurePowerShellCredential = true,
-                ExcludeInteractiveBrowserCredential = true,
-                ExcludeSharedTokenCacheCredential = true,
-                ExcludeVisualStudioCodeCredential = true,
-                ExcludeVisualStudioCredential = true,
-            });
+            azureCredential ??= new DefaultAzureCredential();
 
             try
             {
