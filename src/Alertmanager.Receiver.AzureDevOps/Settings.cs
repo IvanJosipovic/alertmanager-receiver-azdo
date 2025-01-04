@@ -26,8 +26,8 @@ public class Settings
 
 public enum LogFormat
 {
+    Simple,
     JSON,
-    Simple
 }
 
 public class Field
