@@ -16,9 +16,12 @@ public class Settings
 
     public List<Field> NewWorkItemFields { get; set; } = null!;
 
-    // Auth
-    public string PAT { get; set; } = null!;
+    public Authentication Authentication { get; set; } = null!;
+}
 
+public class Authentication
+{
+    public string PAT { get; set; } = null!;
     public string TenantId { get; set; } = null!;
     public string ClientId { get; set; } = null!;
     public string ClientSecret { get; set; } = null!;
