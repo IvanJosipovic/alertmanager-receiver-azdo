@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.Services.WebApi.Patch.Json;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
+using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 
@@ -28,6 +29,15 @@ public class Program
 
         builder.Services.AddSingleton<IAlertProcessor, AlertProcessor>();
         builder.Services.AddSingleton<Instrumentation>();
+
+        if (settings.LogFormat == LogFormat.JSON)
+        {
+            builder.Logging.AddJsonConsole(options =>
+            {
+                options.IncludeScopes = false;
+                options.TimestampFormat = "HH:mm:ss";
+            });
+        }
 
         builder.Logging.AddFilter("Default", settings.LogLevel);
         builder.Logging.AddFilter("Alertmanager", settings.LogLevel);

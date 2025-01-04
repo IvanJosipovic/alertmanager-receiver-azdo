@@ -18,6 +18,9 @@ settings:
   # Log Level(Trace, Debug, Information, Warning, Error, Critical, and None)
   logLevel: Information
 
+  # Log Format (Simple or JSON)
+  logFormat: Simple
+
   # Azure DevOps Organization
   organization: ""
 
