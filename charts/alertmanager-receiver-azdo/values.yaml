@@ -81,9 +81,13 @@ serviceAccount:
   create: true
   # Annotations to add to the service account
   annotations: {}
+    # azure.workload.identity/client-id: #Client Id
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name: ""
+
+podLabels:
+  # azure.workload.identity/use: "true"
 
 podAnnotations:
   prometheus.io/scrape: 'true'
