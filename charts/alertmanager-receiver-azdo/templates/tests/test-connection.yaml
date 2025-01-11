@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "alertmanager-receiver-azdo.fullname" . }}-test-connection"
+  labels:
+    {{- include "alertmanager-receiver-azdo.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "alertmanager-receiver-azdo.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never

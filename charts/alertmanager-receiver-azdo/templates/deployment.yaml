@@ -1,0 +1,134 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "alertmanager-receiver-azdo.fullname" . }}
+  labels:
+    {{- include "alertmanager-receiver-azdo.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "alertmanager-receiver-azdo.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+      {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "alertmanager-receiver-azdo.selectorLabels" . | nindent 8 }}
+      {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "alertmanager-receiver-azdo.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          env:
+          - name: ASPNETCORE_ENVIRONMENT
+            value: Production
+          {{- if .Values.settings.authentication.kubeSecretName }}
+          - name: settings__authentication__pat
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.settings.authentication.kubeSecretName }}
+                key: pat
+                optional: true
+          - name: AZURE_TENANT_ID
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.settings.authentication.kubeSecretName }}
+                key: tenantId
+                optional: true
+          - name: settings__authentication__tenantId
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.settings.authentication.kubeSecretName }}
+                key: tenantId
+                optional: true
+          - name: AZURE_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.settings.authentication.kubeSecretName }}
+                key: clientId
+                optional: true
+          - name: settings__authentication__clientId
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.settings.authentication.kubeSecretName }}
+                key: clientId
+                optional: true
+          - name: AZURE_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.settings.authentication.kubeSecretName }}
+                key: clientSecret
+                optional: true
+          - name: settings__authentication__clientSecret
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.settings.authentication.kubeSecretName }}
+                key: clientSecret
+                optional: true
+          {{- else}}
+          {{- if .Values.settings.authentication.tenantId }}
+          - name: AZURE_TENANT_ID
+            value: {{ .Values.settings.authentication.tenantId }}
+          {{- end }}
+          {{- if .Values.settings.authentication.clientId }}
+          - name: AZURE_CLIENT_ID
+            value: {{ .Values.settings.authentication.clientId }}
+          {{- end }}
+          {{- if .Values.settings.authentication.clientSecret }}
+          - name: AZURE_CLIENT_SECRET
+            value: {{ .Values.settings.authentication.clientSecret }}
+          {{- end }}
+          {{- end }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: appsettings-volume
+              mountPath: /app/appsettings.Production.json
+              subPath: appsettings.Production.json
+              readOnly: true
+      volumes:
+        - name: appsettings-volume
+          secret:
+            secretName: {{ include "alertmanager-receiver-azdo.fullname" . }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

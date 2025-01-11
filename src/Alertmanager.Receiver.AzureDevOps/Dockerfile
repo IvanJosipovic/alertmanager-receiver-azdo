@@ -1,0 +1,60 @@
+ARG BUILDPLATFORM=linux/amd64
+
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:9.0-alpine@sha256:cdc618c61fb14b297986a06ea895efe6eb49e30dfe3b2b6c8b4793e600a5f298 AS build
+RUN apk add build-base zlib-dev
+WORKDIR /src
+COPY Alertmanager.Receiver.AzureDevOps.csproj .
+RUN dotnet restore "Alertmanager.Receiver.AzureDevOps.csproj"
+COPY . .
+RUN dotnet build "Alertmanager.Receiver.AzureDevOps.csproj" -c Release -o /app/build
+
+FROM build AS publish
+ARG VERSION=0.0.1
+RUN dotnet publish "Alertmanager.Receiver.AzureDevOps.csproj" -c Release --use-current-runtime -o /app/publish /p:Version=${VERSION}
+
+FROM mcr.microsoft.com/dotnet/runtime-deps:9.0-alpine@sha256:af88eef3a293a3d57b49f1e9114f6a6b17f7525c651ef257262c10ab5b8cd1bf AS base
+WORKDIR /app
+EXPOSE 8080
+
+LABEL org.opencontainers.image.description="Prometheus Alertmanager Receiver for Azure DevOps"
+
+# renovate: datasource=repology depName=alpine_3_20/ca-certificates-bundle versioning=loose
+ENV CA_CERTIFICATES_BUNDLES_VERSION="20241121-r1"
+
+# renovate: datasource=repology depName=alpine_3_20/busybox versioning=loose
+ENV BUSYBOX_VERSION="1.36.1-r29"
+
+# renovate: datasource=repology depName=alpine_3_20/busybox-binsh versioning=loose
+ENV BUSYBOX_BINSH_VERSION="1.36.1-r29"
+
+# renovate: datasource=repology depName=alpine_3_20/libcrypto3 versioning=loose
+ENV LIBCRYPTO3_VERSION="3.3.2-r1"
+
+# renovate: datasource=repology depName=alpine_3_20/ssl_client versioning=loose
+ENV SSL_VERSION="1.36.1-r29"
+
+# renovate: datasource=repology depName=alpine_3_20/libgcc versioning=loose
+ENV LIBGCC_VERSION="13.2.1_git20240309-r0"
+
+# renovate: datasource=repology depName=alpine_3_20/libssl3 versioning=loose
+ENV LIBSSL3_VERSION="3.3.2-r1"
+
+# renovate: datasource=repology depName=alpine_3_20/libstdc++ versioning=loose
+ENV LIBSTDC_VERSION="13.2.1_git20240309-r0"
+
+RUN apk add --upgrade --no-cache \
+        ca-certificates-bundle>$CA_CERTIFICATES_BUNDLES_VERSION \
+        busybox>$BUSYBOX_BINSH_VERSION \
+        busybox-binsh>$BUSYBOX_BINSH_VERSION \
+        libcrypto3>$LIBCRYPTO3_VERSION \
+        ssl_client>$SSL_VERSION \
+        \
+        # .NET dependencies
+        libgcc>$LIBGCC_VERSION \
+        libssl3>$LIBSSL3_VERSION \
+        libstdc++>$LIBSTDC_VERSION
+
+USER app
+
+COPY --from=publish /app/publish .
+ENTRYPOINT ["./Alertmanager.Receiver.AzureDevOps"]
