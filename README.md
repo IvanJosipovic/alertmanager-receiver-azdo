@@ -20,10 +20,10 @@ This project is an API server which implements the [Alertmanager Webhook Receive
 ## Installation
 ### Configure Helm Values
 
-Download the default [Helm Values](https://raw.githubusercontent.com/IvanJosipovic/alertmanager-receiver-azdo/alpha/charts/alertmanager-receiver-azdo/values.yaml)
+Download the default [Helm Values](https://raw.githubusercontent.com/IvanJosipovic/alertmanager-receiver-azdo/main/charts/alertmanager-receiver-azdo/values.yaml)
 
 ```bash
-curl https://raw.githubusercontent.com/IvanJosipovic/alertmanager-receiver-azdo/alpha/charts/alertmanager-receiver-azdo/values.yaml --output values.yaml
+curl https://raw.githubusercontent.com/IvanJosipovic/alertmanager-receiver-azdo/main/charts/alertmanager-receiver-azdo/values.yaml --output values.yaml
 ```
 
 Modify the settings to fit your needs
@@ -41,7 +41,7 @@ helm install alertmanager-receiver-azdo alertmanager-receiver-azdo/alertmanager-
 ### Create Alertmanager Config
 
 ```yaml
-apiVersion: monitoring.coreos.com/v1alpha1
+apiVersion: monitoring.coreos.com/v1main1
 kind: AlertmanagerConfig
 metadata:
   name: azdo
