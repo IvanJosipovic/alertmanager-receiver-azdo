@@ -13,7 +13,7 @@ This project is an API server which implements the [Alertmanager Webhook Receive
 - Customizable Fields allow support for custom Azure DevOps Processes
 - Authentication
   - [Personal Access Token](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate)
-  - [Service Principle](https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/service-principal-managed-identity)
+  - [Client Secret](https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/service-principal-managed-identity)
   - [Workload Identity](https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview)
 - AMD64 and ARM64 support
 

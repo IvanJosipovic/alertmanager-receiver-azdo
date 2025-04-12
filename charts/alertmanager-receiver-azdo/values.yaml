@@ -28,16 +28,16 @@ settings:
   project: ""
 
   authentication:
-    # Azure DevOps PAT Token. This is needed when not using Service Principle or Workload Identity authentication
+    # Azure DevOps PAT Token. This is needed when not using Client Secret or Workload Identity authentication
     pat: ""
 
-    # Entra Tenant Id. This is needed for Service Principle and Workload Identity authentication
+    # Entra Tenant Id. This is needed for Client Secret and Workload Identity authentication
     tenantId: ""
 
-    # Entra Application Client ID. This is needed for Service Principle and Workload Identity authentication
+    # Entra Application Client ID. This is needed for Client Secret and Workload Identity authentication
     clientId: ""
 
-    # Entra Application Client Secret. This is needed for Service Principle authentication
+    # Entra Application Client Secret. This is needed for Client Secret authentication
     clientSecret: ""
 
     # Alternatively, enter the Kubernetes Secret name
