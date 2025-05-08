@@ -5,6 +5,28 @@ entries:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/license: MIT
     apiVersion: v2
+    appVersion: 1.0.33
+    created: "2025-05-08T15:48:36.437054138Z"
+    description: Prometheus Alertmanager Receiver for Azure DevOps
+    digest: 48f6e8a9549d8c5e6a47ea7c9e9c0f8e7ec26522143ed8512592409d9cd44f10
+    home: https://github.com/IvanJosipovic/alertmanager-receiver-azdo
+    keywords:
+    - prometheus
+    - alertmanager
+    - azure devops
+    - alert
+    - notification
+    name: alertmanager-receiver-azdo
+    sources:
+    - https://github.com/IvanJosipovic/alertmanager-receiver-azdo
+    type: application
+    urls:
+    - https://github.com/IvanJosipovic/alertmanager-receiver-azdo/releases/download/alertmanager-receiver-azdo-1.0.33/alertmanager-receiver-azdo-1.0.33.tgz
+    version: 1.0.33
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/license: MIT
+    apiVersion: v2
     appVersion: 1.0.32
     created: "2025-05-08T07:48:15.831247677Z"
     description: Prometheus Alertmanager Receiver for Azure DevOps
@@ -1031,4 +1053,4 @@ entries:
     urls:
     - https://github.com/IvanJosipovic/alertmanager-receiver-azdo/releases/download/alertmanager-receiver-azdo-1.0.0-alpha.1/alertmanager-receiver-azdo-1.0.0-alpha.1.tgz
     version: 1.0.0-alpha.1
-generated: "2025-05-08T07:48:15.831625933Z"
+generated: "2025-05-08T15:48:36.437441995Z"
