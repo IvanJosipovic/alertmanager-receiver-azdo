@@ -33,6 +33,15 @@
       "respectLatest": false
     },
     {
+      "groupName": "Azure DevOps",
+      "separateMajorMinor": true,
+      "groupSlug": "azure-devops",
+      "matchPackageNames": [
+        "Microsoft.TeamFoundationServer.*",
+        "Microsoft.VisualStudio.Services.*"
+      ]
+    },
+    {
       "matchUpdateTypes": [
         "minor",
         "patch",
