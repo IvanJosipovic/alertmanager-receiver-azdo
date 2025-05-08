@@ -20,6 +20,17 @@
   ],
   "packageRules": [
     {
+      "matchManagers": ["nuget"],
+      "matchPackageNames": [
+        "Microsoft.TeamFoundationServer.Client",
+        "Microsoft.VisualStudio.Services.InteractiveClient",
+        "OpenTelemetry.Exporter.Prometheus.AspNetCore",
+        "OpenTelemetry.Instrumentation.EventCounters"
+      ],
+      "ignoreUnstable": false,
+      "respectLatest": false
+    },
+    {
       "matchUpdateTypes": [
         "minor",
         "patch",
