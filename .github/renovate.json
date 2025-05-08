@@ -20,7 +20,9 @@
   ],
   "packageRules": [
     {
-      "matchManagers": ["nuget"],
+      "matchManagers": [
+        "nuget"
+      ],
       "matchPackageNames": [
         "Microsoft.TeamFoundationServer.Client",
         "Microsoft.VisualStudio.Services.InteractiveClient",
@@ -72,8 +74,8 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": [
-        "Dockerfile$"
+      "managerFilePatterns": [
+        "/Dockerfile$/"
       ],
       "matchStrings": [
         "#\\s*renovate:\\s*datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\sENV .*?_VERSION=\"(?<currentValue>.*)\"\\s"
