@@ -21,7 +21,12 @@
   "packageRules": [
     {
       "matchManagers": ["nuget"],
-      "matchPackageNames": ["OpenTelemetry.Exporter.Prometheus.AspNetCore", "OpenTelemetry.Instrumentation.EventCounters"],
+      "matchPackageNames": [
+        "Microsoft.TeamFoundationServer.Client",
+        "Microsoft.VisualStudio.Services.InteractiveClient",
+        "OpenTelemetry.Exporter.Prometheus.AspNetCore",
+        "OpenTelemetry.Instrumentation.EventCounters"
+      ],
       "ignoreUnstable": false,
       "respectLatest": false
     },
