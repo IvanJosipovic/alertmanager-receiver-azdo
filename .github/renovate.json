@@ -33,12 +33,12 @@
     },
     {
       "groupName": "Azure DevOps",
-      "separateMajorMinor": true,
       "groupSlug": "azure-devops",
       "matchPackageNames": [
         "Microsoft.TeamFoundationServer.*",
         "Microsoft.VisualStudio.Services.*"
       ]
+      "separateMajorMinor": true,
     },
     {
       "automerge": true,
@@ -48,7 +48,7 @@
         "digest"
       ],
       "matchFileNames": [
-        "globa.json"
+        "global.json"
       ]
     },
     {
