@@ -19,7 +19,7 @@ EXPOSE 8080
 LABEL org.opencontainers.image.description="Prometheus Alertmanager Receiver for Azure DevOps"
 
 # renovate: datasource=repology depName=alpine_3_21/ca-certificates-bundle versioning=loose
-ENV CA_CERTIFICATES_BUNDLES_VERSION="20250619-r0"
+ENV CA_CERTIFICATES_BUNDLES_VERSION="20250911-r0"
 
 # renovate: datasource=repology depName=alpine_3_21/busybox versioning=loose
 ENV BUSYBOX_VERSION="1.37.0-r13"
