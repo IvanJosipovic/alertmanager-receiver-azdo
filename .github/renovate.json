@@ -86,7 +86,7 @@
         "digest"
       ],
       "matchPackageNames": [
-        "alpine_*"
+        "/alpine_.*/"
       ],
       "semanticCommitType": "fix"
     }
