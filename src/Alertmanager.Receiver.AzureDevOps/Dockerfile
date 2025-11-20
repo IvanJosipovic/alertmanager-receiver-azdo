@@ -1,6 +1,6 @@
 ARG BUILDPLATFORM=linux/amd64
 
-FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:9.0-alpine3.21@sha256:c8e413519aaee89a4fbe3d6b2bf72535338b212b4c82ab878565b2dd42500100 AS build
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:9.0-alpine3.21@sha256:28bd5605c0592f5bba90670ccd9af1af2c41c9fb0fbe4e666106791c94d8b60f AS build
 RUN apk add build-base zlib-dev
 WORKDIR /src
 COPY Alertmanager.Receiver.AzureDevOps.csproj .
@@ -12,7 +12,7 @@ FROM build AS publish
 ARG VERSION=0.0.1
 RUN dotnet publish "Alertmanager.Receiver.AzureDevOps.csproj" -c Release --use-current-runtime -o /app/publish /p:Version=${VERSION}
 
-FROM mcr.microsoft.com/dotnet/runtime-deps:9.0-alpine3.21@sha256:36e4af6075782e3c837dedb808823dbb4b1f1cad17350f97f9c2876540d30b17 AS base
+FROM mcr.microsoft.com/dotnet/runtime-deps:9.0-alpine3.21@sha256:819bb62452393a158d6aa41178127889b45690dc90bb5823c241776ac2610229 AS base
 WORKDIR /app
 EXPOSE 8080
 
