@@ -22,16 +22,16 @@ LABEL org.opencontainers.image.description="Prometheus Alertmanager Receiver for
 ENV CA_CERTIFICATES_BUNDLES_VERSION="20250911-r0"
 
 # renovate: datasource=repology depName=alpine_3_21/busybox versioning=loose
-ENV BUSYBOX_VERSION="1.37.0-r13"
+ENV BUSYBOX_VERSION="1.37.0-r14"
 
 # renovate: datasource=repology depName=alpine_3_21/busybox-binsh versioning=loose
-ENV BUSYBOX_BINSH_VERSION="1.37.0-r13"
+ENV BUSYBOX_BINSH_VERSION="1.37.0-r14"
 
 # renovate: datasource=repology depName=alpine_3_21/libcrypto3 versioning=loose
 ENV LIBCRYPTO3_VERSION="3.3.5-r0"
 
 # renovate: datasource=repology depName=alpine_3_21/ssl_client versioning=loose
-ENV SSL_VERSION="1.37.0-r13"
+ENV SSL_VERSION="1.37.0-r14"
 
 # renovate: datasource=repology depName=alpine_3_21/libgcc versioning=loose
 ENV LIBGCC_VERSION="14.2.0-r4"
