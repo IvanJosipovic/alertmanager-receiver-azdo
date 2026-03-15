@@ -42,6 +42,9 @@ ENV LIBSSL3_VERSION="3.3.6-r0"
 # renovate: datasource=repology depName=alpine_3_23/libstdc++ versioning=loose
 ENV LIBSTDC_VERSION="14.2.0-r4"
 
+# renovate: datasource=repology depName=alpine_3_23/zlib versioning=loose
+ENV LIBZLIB_VERSION="1.3.2-r0"
+
 RUN apk add --upgrade --no-cache \
         ca-certificates-bundle>$CA_CERTIFICATES_BUNDLES_VERSION \
         busybox>$BUSYBOX_BINSH_VERSION \
@@ -52,7 +55,8 @@ RUN apk add --upgrade --no-cache \
         # .NET dependencies
         libgcc>$LIBGCC_VERSION \
         libssl3>$LIBSSL3_VERSION \
-        libstdc++>$LIBSTDC_VERSION
+        libstdc++>$LIBSTDC_VERSION\
+        zlib>$LIBZLIB_VERSION
 
 USER app
 
