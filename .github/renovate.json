@@ -10,6 +10,8 @@
     "config:recommended"
   ],
   "platformAutomerge": true,
+  "prConcurrentLimit": 0,
+  "prHourlyLimit": 0,
   "ignorePaths": [
     "**/docs/**",
     "**/charts/**"
@@ -23,13 +25,20 @@
         "nuget"
       ],
       "matchPackageNames": [
-        "Microsoft.TeamFoundationServer.Client",
-        "Microsoft.VisualStudio.Services.InteractiveClient",
         "OpenTelemetry.Exporter.Prometheus.AspNetCore",
-        "OpenTelemetry.Instrumentation.EventCounters"
+        "OpenTelemetry.Instrumentation.Process"
       ],
       "ignoreUnstable": false,
       "respectLatest": false
+    },
+    {
+      "groupName": "OpenTelemetry",
+      "separateMajorMinor": true,
+      "groupSlug": "opentelemetry",
+      "matchPackageNames": [
+        "OpenTelemetry",
+        "OpenTelemetry.*"
+      ]
     },
     {
       "groupName": "Azure DevOps",
